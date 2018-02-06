@@ -37,7 +37,8 @@ public class BeamServlet extends HttpServlet {
             beam.rollerDistance = Double.parseDouble(req.getParameter("rollerLocation"));
             beam.forceDistance = Double.parseDouble(req.getParameter("loadLocation"));
             beam.force = Double.parseDouble(req.getParameter("loadMagnitude"));
-            beam.moment = 0;
+            beam.force = Double.parseDouble(req.getParameter("loadMagnitude"));
+            beam.angle = Double.parseDouble(req.getParameter("angle"));
 
 
             RealVector solution = beam.solve();
@@ -46,9 +47,13 @@ public class BeamServlet extends HttpServlet {
             beam.pinReactionY = (solution.getEntry(1));
             beam.rollerReactionY = (solution.getEntry(2));
 
-            System.out.println(beam.pinReactionX);
-            System.out.println(beam.pinReactionY);
-            System.out.println(beam.rollerReactionY);
+
+
+
+            req.setAttribute("beamLength", beam.length);
+            req.setAttribute("pinReactionX", beam.pinReactionX);
+            req.setAttribute("pinReactionY", beam.pinReactionY);
+            req.setAttribute("rollerReactionY", beam.rollerReactionY);
         }
 
 
