@@ -26,34 +26,41 @@ public class BeamServlet extends HttpServlet {
 
         Beam beam = new Beam();
 
-        if (req.getParameter("length") != null &&
-                req.getParameter("pinLocation") != null &&
+        if (req.getParameter("length")             != null &&
+                req.getParameter("pinLocation")    != null &&
                 req.getParameter("rollerLocation") != null &&
-                req.getParameter("loadLocation") != null &&
-                req.getParameter("loadMagnitude") != null) {
+                req.getParameter("loadLocation")   != null &&
+                req.getParameter("loadMagnitude")  != null) {
 
-            beam.length = Double.parseDouble(req.getParameter("length"));
-            beam.pinDistance = Double.parseDouble(req.getParameter("pinLocation"));
-            beam.rollerDistance = Double.parseDouble(req.getParameter("rollerLocation"));
-            beam.forceDistance = Double.parseDouble(req.getParameter("loadLocation"));
-            beam.force = Double.parseDouble(req.getParameter("loadMagnitude"));
-            beam.force = Double.parseDouble(req.getParameter("loadMagnitude"));
-            beam.angle = Double.parseDouble(req.getParameter("angle"));
+            beam.setLength(         Double.parseDouble(req.getParameter("length"         )));
+            beam.setPinDistance(    Double.parseDouble(req.getParameter("pinLocation"    )));
+            beam.setRollerDistance( Double.parseDouble(req.getParameter("rollerLocation" )));
+            beam.setForceDistance(  Double.parseDouble(req.getParameter("loadLocation"   )));
+            beam.setForce(          Double.parseDouble(req.getParameter("loadMagnitude"  )));
+            beam.setForceAngle(     Double.parseDouble(req.getParameter("angle"          )));
 
 
             RealVector solution = beam.solve();
 
-            beam.pinReactionX = (solution.getEntry(0));
-            beam.pinReactionY = (solution.getEntry(1));
-            beam.rollerReactionY = (solution.getEntry(2));
+            beam.setPinReactionX((    solution.getEntry(0)));
+            beam.setPinReactionY((    solution.getEntry(1)));
+            beam.setRollerReactionY(( solution.getEntry(2)));
+
+
+
+            req.setAttribute("beam", beam);
+            req.setAttribute("beamLength"     , beam.getLength());
+            req.setAttribute("pinDistance"    , beam.getPinDistance());
+            req.setAttribute("rollerDistance" , beam.getRollerDistance());
+            req.setAttribute("forceDistance"  , beam.getForceDistance());
 
 
 
 
-            req.setAttribute("beamLength", beam.length);
-            req.setAttribute("pinReactionX", beam.pinReactionX);
-            req.setAttribute("pinReactionY", beam.pinReactionY);
-            req.setAttribute("rollerReactionY", beam.rollerReactionY);
+
+            req.setAttribute("pinReactionX"   , beam.getPinReactionX());
+            req.setAttribute("pinReactionY"   , beam.getPinReactionY());
+            req.setAttribute("rollerReactionY", beam.getRollerReactionY());
         }
 
 
