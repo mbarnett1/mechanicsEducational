@@ -12,21 +12,21 @@
 <div class="container-fluid">
     <form action="/beamServlet" method="GET">
         Length:
-        <input type="text" name="length" id="length"><br>
+        <input type="text" name="length" id="length" value="${beam.length}"><br>
         Pin Support Location (m):
-        <input type="text" name="pinLocation" id="pinLocation"><br>
+        <input type="text" name="pinLocation" id="pinLocation" value="${beam.pinDistance}"><br>
         Roller Support Location (m):
-        <input type="text" name="rollerLocation" id="rollerLocation"><br>
+        <input type="text" name="rollerLocation" id="rollerLocation" value="${beam.rollerDistance}"><br>
         Load Location (m):
-        <input type="text" name="loadLocation" id="loadLocation"><br>
+        <input type="text" name="loadLocation" id="loadLocation" value="${beam.forceDistance}"><br>
         Load Magnitude (N):
-        <input type="text" name="loadMagnitude" id="loadMagnitude"><br>
+        <input type="text" name="loadMagnitude" id="loadMagnitude" value="${beam.force}"><br>
         Load Orientation (deg) 0 is up clockwise is positive:
-        <input type="text" name="angle" id="angle"><br>
+        <input type="text" name="angle" id="angle" value="${beam.forceAngle*180/3.1415926535}"><br>
 
 
 
-        <input type="submit" value="Submit"">
+        <input type="submit" value="Submit">
 
 
     </form>
@@ -34,15 +34,14 @@
     <div id="container"></div>
     <div id="container2"></div>
 
-    <button onclick="createDiagram()">Create Diagram</button>
 
-
-
-
-    <h2> beam length: ${beam.length} </h2>
     <h2> pin reaction x: ${beam.pinReactionX} </h2>
     <h2> pin reaction y: ${beam.pinReactionY} </h2>
     <h2> roller reaction y: ${beam.rollerReactionY} </h2>
+
+    <script>
+        createDiagram();
+    </script>
 
 
 
