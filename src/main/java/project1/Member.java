@@ -2,8 +2,20 @@ package project1;
 
 public class Member {
 
+    private int memberId;
+
     private double x1;
     private double y1;
+    private double x2;
+    private double y2;
+
+    private double length;
+
+    private double i12;
+    private double j12;
+
+    private double i21;
+    private double j21;
 
     public double getX1() {
         return x1;
@@ -79,18 +91,13 @@ public class Member {
 
 
 
+    public int getMemberId() {
+        return memberId;
+    }
 
-    private double x2;
-    private double y2;
-
-    private double length;
-
-    private double i12;
-    private double j12;
-
-    private double i21;
-    private double j21;
-
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
 
     public double calculate_i12() {
         i12 = (x2-x1)/calculateLength();
@@ -114,7 +121,7 @@ public class Member {
 
 
     public double calculateLength() {
-        length = Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((x1-x2), 2));
+        length = Math.sqrt(Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2));
         return length;
 
     }
