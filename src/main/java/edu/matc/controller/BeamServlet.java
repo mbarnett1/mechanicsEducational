@@ -1,7 +1,8 @@
-package project1;
+package edu.matc.controller;
 
 
 import org.apache.commons.math3.linear.RealVector;
+import edu.matc.entity.Beam;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

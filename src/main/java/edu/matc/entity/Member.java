@@ -1,4 +1,4 @@
-package project1;
+package edu.matc.entity;
 
 public class Member {
 

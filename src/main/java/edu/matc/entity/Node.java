@@ -1,4 +1,9 @@
-package project1;
+package edu.matc.entity;
+
+import org.apache.commons.math3.linear.*;
+
+import java.util.Arrays;
+
 
 public class Node {
 
@@ -18,6 +23,9 @@ public class Node {
     private double pinY;
     private double rollerY;
 
+    // {member1 member2 member3 R R R }
+    private double[] arrayX = new double[] {0, 0, 0, 0, 0, 0};
+    private double[] arrayY = new double[] {0, 0, 0, 0, 0, 0};
 
 
     public Node(double x, double y) {
@@ -73,21 +81,27 @@ public class Node {
         this.yForcesSum = yForcesSum;
     }
 
+    public double[] getArrayX() {
+        return arrayX;
+    }
+
+    public void setArrayX(double[] arrayX) {
+        this.arrayX = arrayX;
+    }
+
+    public double[] getArrayY() {
+        return arrayY;
+    }
+
+    public void setArrayY(double[] arrayY) {
+        this.arrayY = arrayY;
+    }
 
     @Override
     public String toString() {
         return "Node{" +
-                "x=" + x +
-                ", y=" + y +
-                ", xForcesSum=" + xForcesSum +
-                ", yForcesSum=" + yForcesSum +
-                ", member1=" + member1 +
-                ", member2=" + member2 +
-                ", member3=" + member3 +
-                ", pinX=" + pinX +
-                ", pinY=" + pinY +
-                ", rollerY=" + rollerY +
+                "arrayX=" + Arrays.toString(arrayX) +
+                ", arrayY=" + Arrays.toString(arrayY) +
                 '}';
     }
-
 }

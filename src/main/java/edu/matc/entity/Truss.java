@@ -1,8 +1,9 @@
-package project1;
+package edu.matc.entity;
 
 import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 public class Truss {
 
@@ -48,7 +49,11 @@ public class Truss {
         ArrayList<Member> listOfMembers = members.getMemberList();
         ArrayList<Node> listOfNodes = nodes.getNodeList();
 
+        int memberIdCount = 1;
+
         for (Member member: listOfMembers) {
+            int memberLocationInArray = memberIdCount -1;
+            //member.setMemberId(memberLocationInArray);
 
             member.setI12(member.calculate_i12());
             member.setJ12(member.calculate_j12());
@@ -72,18 +77,46 @@ public class Truss {
             boolean match2 = false;
 
             if (listOfNodes.isEmpty()) {
-                listOfNodes.add(new Node(x1, y1, I1, J1));
-                listOfNodes.add(new Node(x2, y2, I2, J2));
+                Node node1 = new Node(x1, y1, I1, J1);
+
+                double[] array1X = node1.getArrayX();
+                array1X[memberLocationInArray] = I1;
+                node1.setArrayX(array1X);
+
+                double[] array1Y = node1.getArrayY();
+                array1Y[memberLocationInArray] = J1;
+                node1.setArrayY(array1Y);
+
+                listOfNodes.add(node1);
+
+
+
+                Node node2 = new Node(x2, y2, I2, J2);
+
+                double[] array2X = node2.getArrayX();
+                array2X[memberLocationInArray] = I2;
+                node2.setArrayX(array2X);
+
+                double[] array2Y = node2.getArrayY();
+                array2Y[memberLocationInArray] = J2;
+                node2.setArrayY(array2Y);
+
+                listOfNodes.add(node2);
+
+
             } else {
 
                 for (Node element : listOfNodes) {
                     if (element.getX() == x1 && element.getY() == y1) {
                         match1 = true;
 
-                        double newXForcesSum = element.getXForcesSum() + I1;
-                        element.setXForcesSum(newXForcesSum);
-                        double newYForcesSum = element.getYForcesSum() + J1;
-                        element.setYForcesSum(newYForcesSum);
+                        double[] array1X = element.getArrayX();
+                        array1X[memberLocationInArray] = I1;
+                        element.setArrayX(array1X);
+
+                        double[] array1Y = element.getArrayY();
+                        array1Y[memberLocationInArray] = J1;
+                        element.setArrayY(array1Y);
 
                         break;
                     } else {
@@ -95,10 +128,13 @@ public class Truss {
                     if (element.getX() == x2 && element.getY() == y2) {
                         match2 = true;
 
-                        double newXForcesSum = element.getXForcesSum() + I2;
-                        element.setXForcesSum(newXForcesSum);
-                        double newYForcesSum = element.getYForcesSum() + J2;
-                        element.setYForcesSum(newYForcesSum);
+                        double[] array2X = element.getArrayX();
+                        array2X[memberLocationInArray] = I2;
+                        element.setArrayX(array2X);
+
+                        double[] array2Y = element.getArrayY();
+                        array2Y[memberLocationInArray] = J2;
+                        element.setArrayY(array2Y);
 
                         break;
                     } else {
@@ -108,19 +144,52 @@ public class Truss {
 
 
                 if (!match1) {
-                    listOfNodes.add(new Node(x1, y1, I1, J1));
+
+                    Node node1 = new Node(x1, y1, I1, J1);
+
+                    double[] array1X = node1.getArrayX();
+                    array1X[memberLocationInArray] = I1;
+                    node1.setArrayX(array1X);
+
+                    double[] array1Y = node1.getArrayY();
+                    array1Y[memberLocationInArray] = J1;
+                    node1.setArrayY(array1Y);
+
+                    listOfNodes.add(node1);
+
+
+
+
+
                 }
 
                 if (!match2) {
-                    listOfNodes.add(new Node(x2, y2, I2, J2));
+
+                    Node node2 = new Node(x2, y2, I2, J2);
+
+                    double[] array2X = node2.getArrayX();
+                    array2X[memberLocationInArray] = I2;
+                    node2.setArrayX(array2X);
+
+                    double[] array2Y = node2.getArrayY();
+                    array2Y[memberLocationInArray] = J2;
+                    node2.setArrayY(array2Y);
+
+                    listOfNodes.add(node2);
+
+
+
+
+
                 }
             }
+            memberIdCount++;
         }
 
         for(Node node : listOfNodes) {
             logger.debug(node.toString());
         }
-            logger.debug("NEW RUN");
+        logger.debug("NEW RUN");
 
 
     }

@@ -1,4 +1,4 @@
-package project1;
+package edu.matc.entity;
 
 import java.util.ArrayList;
 

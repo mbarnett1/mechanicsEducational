@@ -1,4 +1,4 @@
-package project1;
+package edu.matc.entity;
 
 import org.apache.commons.math3.linear.*;
 
@@ -111,9 +111,11 @@ public class Beam {
 
         forceAngle = forceAngle*PI/180;
 
+        double[] myArray = new double[] {0, 1, 1};
+
 
         RealMatrix coefficients =
-                new Array2DRowRealMatrix(new double[][] { { 1, 0, 0 }, { 0, 1, 1}, { 0, pinDistance, rollerDistance } },
+                new Array2DRowRealMatrix(new double[][] { { 1, 0, 0 }, myArray, { 0, pinDistance, rollerDistance } },
                         false);
         DecompositionSolver solver = new LUDecomposition(coefficients).getSolver();
 
