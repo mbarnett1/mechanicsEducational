@@ -52,7 +52,7 @@ public class Truss {
         int memberIdCount = 1;
 
         for (Member member: listOfMembers) {
-            int memberLocationInArray = memberIdCount -1;
+            int memberLocationInArray = memberIdCount - 1;
             //member.setMemberId(memberLocationInArray);
 
             member.setI12(member.calculate_i12());
@@ -61,17 +61,17 @@ public class Truss {
             member.setJ21(member.calculate_j21());
 
 
-           double x1 = member.getX1();
-           double y1 = member.getY1();
+            double x1 = member.getX1();
+            double y1 = member.getY1();
 
-           double x2 = member.getX2();
-           double y2 = member.getY2();
+            double x2 = member.getX2();
+            double y2 = member.getY2();
 
-           double I1 =  member.getI12();
-           double J1 =  member.getJ12();
+            double I1 =  member.getI12();
+            double J1 =  member.getJ12();
 
-           double I2 =  member.getI21();
-           double J2 =  member.getJ21();
+            double I2 =  member.getI21();
+            double J2 =  member.getJ21();
 
             boolean match1 = false;
             boolean match2 = false;
@@ -80,91 +80,18 @@ public class Truss {
 
                 addNewNodesToEmptyNodeList(x1, x2, y1, y2, I1, I2, J1, J2, memberLocationInArray, listOfNodes);
 
-
             } else {
 
-                for (Node element : listOfNodes) {
-                    if (element.getX() == x1 && element.getY() == y1) {
-                        match1 = true;
-
-                        double[] array1X = element.getArrayX();
-                        array1X[memberLocationInArray] = I1;
-                        element.setArrayX(array1X);
-
-                        double[] array1Y = element.getArrayY();
-                        array1Y[memberLocationInArray] = J1;
-                        element.setArrayY(array1Y);
-
-                        break;
-                    } else {
-                        match1 = false;
-
-
-
-
-
-
-                    }
-                }
-
-
-
-
-
-
-
-
-
-
-                for (Node element : listOfNodes) {
-                    if (element.getX() == x2 && element.getY() == y2) {
-                        match2 = true;
-
-                        double[] array2X = element.getArrayX();
-                        array2X[memberLocationInArray] = I2;
-                        element.setArrayX(array2X);
-
-                        double[] array2Y = element.getArrayY();
-                        array2Y[memberLocationInArray] = J2;
-                        element.setArrayY(array2Y);
-
-                        break;
-                    } else {
-                        match2 = false;
-                    }
-                }
-
+                match1 = compareNode1ToListOfNodes(x1, y1, I1, J1, memberLocationInArray, listOfNodes, match1);
+                match2 = compareNode2ToListOfNodes(x2, y2, I2, J2, memberLocationInArray, listOfNodes, match2);
 
                 if (!match1) {
-
-                    Node node1 = new Node(x1, y1, I1, J1);
-
-                    double[] array1X = node1.getArrayX();
-                    array1X[memberLocationInArray] = I1;
-                    node1.setArrayX(array1X);
-
-                    double[] array1Y = node1.getArrayY();
-                    array1Y[memberLocationInArray] = J1;
-                    node1.setArrayY(array1Y);
-
-                    listOfNodes.add(node1);
+                    addUniqueNode1ToList(x1, y1, I1, J1, memberLocationInArray, listOfNodes);
                 }
 
                 if (!match2) {
-
-                    Node node2 = new Node(x2, y2, I2, J2);
-
-                    double[] array2X = node2.getArrayX();
-                    array2X[memberLocationInArray] = I2;
-                    node2.setArrayX(array2X);
-
-                    double[] array2Y = node2.getArrayY();
-                    array2Y[memberLocationInArray] = J2;
-                    node2.setArrayY(array2Y);
-
-                    listOfNodes.add(node2);
+                    addUniqueNode2ToList(x2, y2, I2, J2, memberLocationInArray, listOfNodes);
                 }
-
             }
 
             memberIdCount++;
@@ -211,8 +138,76 @@ public class Truss {
         listOfNodes.add(node2);
     }
 
-    public void addUniqueNodeToNodeList() {
+    public void addUniqueNode1ToList(double x1, double y1, double I1, double J1, int memberLocationInArray, ArrayList<Node> listOfNodes) {
+        Node node1 = new Node(x1, y1, I1, J1);
 
+        double[] array1X = node1.getArrayX();
+        array1X[memberLocationInArray] = I1;
+        node1.setArrayX(array1X);
+
+        double[] array1Y = node1.getArrayY();
+        array1Y[memberLocationInArray] = J1;
+        node1.setArrayY(array1Y);
+
+        listOfNodes.add(node1);
+    }
+
+    public void addUniqueNode2ToList(double x2, double y2, double I2, double J2, int memberLocationInArray, ArrayList<Node> listOfNodes) {
+        Node node2 = new Node(x2, y2, I2, J2);
+
+        double[] array2X = node2.getArrayX();
+        array2X[memberLocationInArray] = I2;
+        node2.setArrayX(array2X);
+
+        double[] array2Y = node2.getArrayY();
+        array2Y[memberLocationInArray] = J2;
+        node2.setArrayY(array2Y);
+
+        listOfNodes.add(node2);
+    }
+
+    public boolean compareNode1ToListOfNodes(double x1, double y1, double I1, double J1, int memberLocationInArray, ArrayList<Node> listOfNodes, boolean match1) {
+
+        for (Node element : listOfNodes) {
+            if (element.getX() == x1 && element.getY() == y1) {
+                match1 = true;
+
+                double[] array1X = element.getArrayX();
+                array1X[memberLocationInArray] = I1;
+                element.setArrayX(array1X);
+
+                double[] array1Y = element.getArrayY();
+                array1Y[memberLocationInArray] = J1;
+                element.setArrayY(array1Y);
+
+                break;
+            } else {
+                match1 = false;
+            }
+        }
+        return match1;
+    }
+
+    public boolean compareNode2ToListOfNodes(double x2, double y2, double I2, double J2, int memberLocationInArray, ArrayList<Node> listOfNodes, boolean match2) {
+
+        for (Node element : listOfNodes) {
+            if (element.getX() == x2 && element.getY() == y2) {
+                match2 = true;
+
+                double[] array2X = element.getArrayX();
+                array2X[memberLocationInArray] = I2;
+                element.setArrayX(array2X);
+
+                double[] array2Y = element.getArrayY();
+                array2Y[memberLocationInArray] = J2;
+                element.setArrayY(array2Y);
+
+                break;
+            } else {
+                match2 = false;
+            }
+        }
+        return match2;
     }
 
 
