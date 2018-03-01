@@ -77,31 +77,8 @@ public class Truss {
             boolean match2 = false;
 
             if (listOfNodes.isEmpty()) {
-                Node node1 = new Node(x1, y1, I1, J1);
 
-                double[] array1X = node1.getArrayX();
-                array1X[memberLocationInArray] = I1;
-                node1.setArrayX(array1X);
-
-                double[] array1Y = node1.getArrayY();
-                array1Y[memberLocationInArray] = J1;
-                node1.setArrayY(array1Y);
-
-                listOfNodes.add(node1);
-
-
-
-                Node node2 = new Node(x2, y2, I2, J2);
-
-                double[] array2X = node2.getArrayX();
-                array2X[memberLocationInArray] = I2;
-                node2.setArrayX(array2X);
-
-                double[] array2Y = node2.getArrayY();
-                array2Y[memberLocationInArray] = J2;
-                node2.setArrayY(array2Y);
-
-                listOfNodes.add(node2);
+                addNewNodesToEmptyNodeList(x1, x2, y1, y2, I1, I2, J1, J2, memberLocationInArray, listOfNodes);
 
 
             } else {
@@ -121,8 +98,23 @@ public class Truss {
                         break;
                     } else {
                         match1 = false;
+
+
+
+
+
+
                     }
                 }
+
+
+
+
+
+
+
+
+
 
                 for (Node element : listOfNodes) {
                     if (element.getX() == x2 && element.getY() == y2) {
@@ -156,11 +148,6 @@ public class Truss {
                     node1.setArrayY(array1Y);
 
                     listOfNodes.add(node1);
-
-
-
-
-
                 }
 
                 if (!match2) {
@@ -176,13 +163,10 @@ public class Truss {
                     node2.setArrayY(array2Y);
 
                     listOfNodes.add(node2);
-
-
-
-
-
                 }
+
             }
+
             memberIdCount++;
         }
 
@@ -190,8 +174,48 @@ public class Truss {
             logger.debug(node.toString());
         }
         logger.debug("NEW RUN");
+    }
 
+
+
+
+
+
+
+    public void addNewNodesToEmptyNodeList(double x1, double x2, double y1, double y2, double I1, double I2, double J1, double J2, int memberLocationInArray, ArrayList<Node> listOfNodes) {
+        // Node 1
+        Node node1 = new Node(x1, y1, I1, J1);
+
+        double[] array1X = node1.getArrayX();
+        array1X[memberLocationInArray] = I1;
+        node1.setArrayX(array1X);
+
+        double[] array1Y = node1.getArrayY();
+        array1Y[memberLocationInArray] = J1;
+        node1.setArrayY(array1Y);
+
+        listOfNodes.add(node1);
+
+
+        // Node 2
+        Node node2 = new Node(x2, y2, I2, J2);
+
+        double[] array2X = node2.getArrayX();
+        array2X[memberLocationInArray] = I2;
+        node2.setArrayX(array2X);
+
+        double[] array2Y = node2.getArrayY();
+        array2Y[memberLocationInArray] = J2;
+        node2.setArrayY(array2Y);
+
+        listOfNodes.add(node2);
+    }
+
+    public void addUniqueNodeToNodeList() {
 
     }
+
+
+
 
 }
