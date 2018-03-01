@@ -9,20 +9,42 @@ import static java.lang.Math.sin;
 
 public class Beam {
 
+    // Input Variables
+    private int id;
     private double length;
-
-    private double pinReactionY;
-    private double pinReactionX;
     private double pinDistance;
-
-    private double rollerReactionY;
     private double rollerDistance;
-
     private double force;
     private double forceDistance;
     private double forceAngle;
-
     private double moment;
+
+    // Calculated Variables
+    private double pinReactionX;
+    private double pinReactionY;
+    private double rollerReactionY;
+
+
+    public Beam() { }
+
+    public Beam(double length, double pinDistance, double rollerDistance, double force, double forceDistance, double forceAngle, double moment) {
+        this.length = length;
+        this.pinDistance = pinDistance;
+        this.rollerDistance = rollerDistance;
+        this.force = force;
+        this.forceDistance = forceDistance;
+        this.forceAngle = forceAngle;
+        this.moment = moment;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getLength() {
         return length;
@@ -32,36 +54,12 @@ public class Beam {
         this.length = length;
     }
 
-    public double getPinReactionY() {
-        return pinReactionY;
-    }
-
-    public void setPinReactionY(double pinReactionY) {
-        this.pinReactionY = pinReactionY;
-    }
-
-    public double getPinReactionX() {
-        return pinReactionX;
-    }
-
-    public void setPinReactionX(double pinReactionX) {
-        this.pinReactionX = pinReactionX;
-    }
-
     public double getPinDistance() {
         return pinDistance;
     }
 
     public void setPinDistance(double pinDistance) {
         this.pinDistance = pinDistance;
-    }
-
-    public double getRollerReactionY() {
-        return rollerReactionY;
-    }
-
-    public void setRollerReactionY(double rollerReactionY) {
-        this.rollerReactionY = rollerReactionY;
     }
 
     public double getRollerDistance() {
@@ -104,10 +102,34 @@ public class Beam {
         this.moment = moment;
     }
 
+    public double getPinReactionX() {
+        return pinReactionX;
+    }
 
+    public void setPinReactionX(double pinReactionX) {
+        this.pinReactionX = pinReactionX;
+    }
 
+    public double getPinReactionY() {
+        return pinReactionY;
+    }
+
+    public void setPinReactionY(double pinReactionY) {
+        this.pinReactionY = pinReactionY;
+    }
+
+    public double getRollerReactionY() {
+        return rollerReactionY;
+    }
+
+    public void setRollerReactionY(double rollerReactionY) {
+        this.rollerReactionY = rollerReactionY;
+    }
 
     public RealVector solve() {
+
+        // Remove this when moment is implemented in inputs
+        moment = 0;
 
         forceAngle = forceAngle*PI/180;
 

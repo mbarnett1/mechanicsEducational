@@ -1,13 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
+<head>
+    <script src="konva.js"> </script>
+    <script src="beam.js" > </script>
+    <link rel="stylesheet" href="beam.css">
+</head>
 <body>
 
 <meta charset="utf-8">
 <title>Beam</title>
-<script src="konva.js"> </script>
-<script src="beam.js"></script>
-
 
 <div class="container-fluid">
     <form action="/beamServlet" method="GET">
