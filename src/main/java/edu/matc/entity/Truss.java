@@ -9,7 +9,7 @@ public class Truss {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    public void createTruss(double member1x1, double member1y1, double member1x2, double member1y2, double member2x1, double member2y1, double member2x2, double member2y2, double member3x1, double member3y1, double member3x2, double member3y2) {
+    public void createTruss(double member1x1, double member1y1, double member1x2, double member1y2, double member2x1, double member2y1, double member2x2, double member2y2, double member3x1, double member3y1, double member3x2, double member3y2, double pinX, double pinY, double rollerX, double rollerY) {
 
 
         Member member1 = new Member();
@@ -51,7 +51,7 @@ public class Truss {
 
         int memberIdCount = 1;
 
-        for (Member member: listOfMembers) {
+        for (Member member : listOfMembers) {
             int memberLocationInArray = memberIdCount - 1;
             //member.setMemberId(memberLocationInArray);
 
@@ -67,11 +67,11 @@ public class Truss {
             double x2 = member.getX2();
             double y2 = member.getY2();
 
-            double I1 =  member.getI12();
-            double J1 =  member.getJ12();
+            double I1 = member.getI12();
+            double J1 = member.getJ12();
 
-            double I2 =  member.getI21();
-            double J2 =  member.getJ21();
+            double I2 = member.getI21();
+            double J2 = member.getJ21();
 
             boolean match1 = false;
             boolean match2 = false;
@@ -97,16 +97,18 @@ public class Truss {
             memberIdCount++;
         }
 
-        for(Node node : listOfNodes) {
+        putRollerYIntoNodeArray(rollerX, rollerY, listOfNodes);
+        putPinXIntoNodeArray(pinX, pinY, listOfNodes);
+        putPinYIntoNodeArray(pinX, pinY, listOfNodes);
+
+
+        for (Node node : listOfNodes) {
             logger.debug(node.toString());
         }
         logger.debug("NEW RUN");
+
+
     }
-
-
-
-
-
 
 
     public void addNewNodesToEmptyNodeList(double x1, double x2, double y1, double y2, double I1, double I2, double J1, double J2, int memberLocationInArray, ArrayList<Node> listOfNodes) {
@@ -208,6 +210,51 @@ public class Truss {
             }
         }
         return match2;
+    }
+
+    public void putRollerYIntoNodeArray(double rx, double ry, ArrayList<Node> listOfNodes) {
+
+        for (Node element : listOfNodes) {
+            if (element.getX() == rx && element.getY() == ry) {
+
+                double[] arrayY = element.getArrayY();
+
+                // Roller Y always 3rd from the end
+                int locationInArray = arrayY.length - 3;
+                arrayY[locationInArray] = 1;
+                element.setArrayY(arrayY);
+            }
+        }
+    }
+
+    public void putPinXIntoNodeArray(double px, double py, ArrayList<Node> listOfNodes) {
+
+        for (Node element : listOfNodes) {
+            if (element.getX() == px && element.getY() == py) {
+
+                double[] arrayX = element.getArrayX();
+
+                // Pin X always 2nd from the end
+                int locationInArray = arrayX.length - 2;
+                arrayX[locationInArray] = 1;
+                element.setArrayX(arrayX);
+            }
+        }
+    }
+
+    public void putPinYIntoNodeArray(double px, double py, ArrayList<Node> listOfNodes) {
+
+        for (Node element : listOfNodes) {
+            if (element.getX() == px && element.getY() == py) {
+
+                double[] arrayY = element.getArrayY();
+
+                // Pin Y always last in array
+                int locationInArray = arrayY.length - 1;
+                arrayY[locationInArray] = 1;
+                element.setArrayY(arrayY);
+            }
+        }
     }
 
 

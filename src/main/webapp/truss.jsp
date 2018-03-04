@@ -28,8 +28,26 @@
         x2<input type="text" name="3x2" id="3x2">
         y2<input type="text" name="3y2" id="3y2">
         <br>
+        <br>
+        <br>
+
+        Roller Support:
+        x<input type="text" name="rx" id="rx">
+        y<input type="text" name="ry" id="ry">
+        <br>
+
+        Pin Support:
+        x<input type="text" name="px" id="px">
+        y<input type="text" name="py" id="py">
+        <br>
 
 
+        Force:
+        magnitude<input type="text" name="fm" id="fm">
+        angle    <input type="text" name="fa" id="fa">
+        x        <input type="text" name="fx" id="fx">
+        y        <input type="text" name="fy" id="fy">
+        <br>
 
         <input type="submit" value="Submit">
 

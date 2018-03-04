@@ -23,7 +23,7 @@ public class Node {
     private double pinY;
     private double rollerY;
 
-    // {member1 member2 member3 R R R }
+    // {member1 member2 member3 RX PX PY }
     private double[] arrayX = new double[] {0, 0, 0, 0, 0, 0};
     private double[] arrayY = new double[] {0, 0, 0, 0, 0, 0};
 
