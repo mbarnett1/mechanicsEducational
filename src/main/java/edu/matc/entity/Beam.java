@@ -1,27 +1,57 @@
 package edu.matc.entity;
 
 import org.apache.commons.math3.linear.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-
+@Entity(name = "Beam")
+@Table(name = "beam")
 public class Beam {
 
-    // Input Variables
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     private int id;
+
+    @ManyToOne
+    private User user;     //NOT user_id
+
+    // Input Variables
+    @Column(name = "length")
     private double length;
+
+    @Column(name = "pin_distance")
     private double pinDistance;
+
+    @Column(name = "roller_distance")
     private double rollerDistance;
+
+    @Column(name = "force_F")
     private double force;
+
+    @Column(name = "force_distance")
     private double forceDistance;
+
+    @Column(name = "force_angle")
     private double forceAngle;
+
+    @Column(name = "moment")
     private double moment;
 
     // Calculated Variables
+    @Transient
     private double pinReactionX;
+
+    @Transient
     private double pinReactionY;
+
+    @Transient
     private double rollerReactionY;
 
 
@@ -124,6 +154,14 @@ public class Beam {
 
     public void setRollerReactionY(double rollerReactionY) {
         this.rollerReactionY = rollerReactionY;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public RealVector solve() {

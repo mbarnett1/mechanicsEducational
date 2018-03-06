@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static java.lang.Math.PI;
+
 
 public class Truss {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    public void createTruss(double member1x1, double member1y1, double member1x2, double member1y2, double member2x1, double member2y1, double member2x2, double member2y2, double member3x1, double member3y1, double member3x2, double member3y2, double pinX, double pinY, double rollerX, double rollerY) {
-
+    public void createTruss(double member1x1,      double member1y1,  double member1x2, double member1y2,
+                            double member2x1,      double member2y1,  double member2x2, double member2y2,
+                            double member3x1,      double member3y1,  double member3x2, double member3y2,
+                            double pinX,           double pinY,       double rollerX,   double rollerY,
+                            double forceMagnitude, double forceAngle, double forceX, double forceY) {
 
         Member member1 = new Member();
         member1.setMemberId(1);
@@ -100,6 +105,19 @@ public class Truss {
         putRollerYIntoNodeArray(rollerX, rollerY, listOfNodes);
         putPinXIntoNodeArray(pinX, pinY, listOfNodes);
         putPinYIntoNodeArray(pinX, pinY, listOfNodes);
+
+
+
+        forceAngle = forceAngle*PI/180;
+
+        double forceComponentX;
+        double forceComponentY;
+
+
+
+
+
+
 
 
         for (Node node : listOfNodes) {

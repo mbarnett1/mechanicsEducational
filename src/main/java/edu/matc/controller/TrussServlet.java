@@ -47,8 +47,13 @@ public class TrussServlet extends HttpServlet {
             double pinX      = Double.parseDouble(req.getParameter("px"));
             double pinY      = Double.parseDouble(req.getParameter("py"));
 
+            double forceMagnitude = Double.parseDouble(req.getParameter("fm"));
+            double forceAngle     = Double.parseDouble(req.getParameter("fa"));
+            double forceX         = Double.parseDouble(req.getParameter("fx"));
+            double forceY         = Double.parseDouble(req.getParameter("fy"));
 
-            truss.createTruss(member1x1, member1y1, member1x2, member1y2, member2x1, member2y1, member2x2, member2y2, member3x1, member3y1, member3x2, member3y2, pinX, pinY, rollerX, rollerY);
+
+            truss.createTruss(member1x1, member1y1, member1x2, member1y2, member2x1, member2y1, member2x2, member2y2, member3x1, member3y1, member3x2, member3y2, pinX, pinY, rollerX, rollerY, forceMagnitude, forceAngle, forceX, forceY);
 
         } catch (NullPointerException nullPointerException) {
             System.out.println("first time visting page null form data");

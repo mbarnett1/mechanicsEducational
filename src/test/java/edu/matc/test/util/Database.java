@@ -1,5 +1,6 @@
 package edu.matc.test.util;
 
+import jdk.internal.util.xml.impl.Input;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class Database {
 
     private Connection connection;
 
-    // private constructor prevents instantiating this class anywhere else
+    // private constructor prevents indelete from user;stantiating this class anywhere else
     private Database() {
         loadProperties();
 
@@ -66,7 +67,7 @@ public class Database {
         try {
             Class.forName(properties.getProperty("driver"));
         } catch (ClassNotFoundException e) {
-            throw new Exception("Database.connect()... Error: MySQL Driver not found");
+            logger.debug("Database.connect()... Error: MySQL Driver not found", e);
         }
 
         String url = properties.getProperty("url");
@@ -94,8 +95,12 @@ public class Database {
 
         Statement stmt = null;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        try {
         InputStream inputStream = classloader.getResourceAsStream(sqlFile);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+
+        //try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
 
             Class.forName("com.mysql.jdbc.Driver");
             connect();
